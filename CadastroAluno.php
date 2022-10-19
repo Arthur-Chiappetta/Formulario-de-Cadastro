@@ -35,9 +35,9 @@ class CadastroAluno
     {
 
         $resultado = $this->mysql->query('SELECT id, nome, numero FROM alunos');
-        $artigos = $resultado->fetch_all(MYSQLI_ASSOC);
+        $cadastros = $resultado->fetch_all(MYSQLI_ASSOC);
 
-        return $artigos;
+        return $cadastros;
     }
 
     
