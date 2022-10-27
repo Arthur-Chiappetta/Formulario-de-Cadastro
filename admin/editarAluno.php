@@ -1,16 +1,16 @@
-<?php 
+<?php
 
 require '../config.php';
 require '../src/CadastroAluno.php';
 require '../src/redireciona.php';
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $cadastro = new CadastroAluno($mysql);
     $cadastro->editar($_POST['id'], $_POST['nome'], $_POST['numero']);
 
     redireciona('../index.php');
-}else{
+} else {
 
     $cadastro = new CadastroAluno($mysql);
     $cad = $cadastro->encontrarPorId($_GET['id']);
@@ -20,6 +20,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,8 +47,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             <p>
                 <label for="numero">Redefinir número de celular</label>
                 <input class="campo-form" type="text" name="numero" id="numero" value="<?php echo $cad['numero']; ?>">
-            
-            
+
+
                 </input>
             </p>
             <p>
@@ -59,4 +60,5 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         </form>
     </div>
 </body>
+
 </html>

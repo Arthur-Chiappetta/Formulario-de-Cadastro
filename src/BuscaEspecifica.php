@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class BuscaEspecifica
 {
@@ -10,13 +10,10 @@ class BuscaEspecifica
         $this->mysql = $mysql;
     }
 
-    function buscaEspecifica(string $pesquisa):array
+    function buscaEspecifica(string $pesquisa): array
     {
         $busca = $this->mysql->query("SELECT * FROM alunos WHERE nome LIKE '%$pesquisa%' OR numero LIKE '%$pesquisa%'");
         $resultado = $busca->fetch_all(MYSQLI_ASSOC);
         return $resultado;
-
     }
-
 }
-

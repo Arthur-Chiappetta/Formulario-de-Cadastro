@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 class CadastroAluno
@@ -40,7 +40,7 @@ class CadastroAluno
         return $cadastros;
     }
 
-    public function encontrarPorId(string $id):array
+    public function encontrarPorId(string $id): array
     {
         $selecionarAluno = $this->mysql->prepare("SELECT id, nome, numero FROM alunos WHERE id = ?");
         $selecionarAluno->bind_param('s', $id);
@@ -48,6 +48,5 @@ class CadastroAluno
         $aluno = $selecionarAluno->get_result()->fetch_array();
 
         return $aluno;
-
-    }  
+    }
 }

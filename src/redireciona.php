@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 
-function redireciona(string $url):void
+function redireciona(string $url): void
 {
     header("Location: $url");
     die;

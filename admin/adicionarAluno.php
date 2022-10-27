@@ -5,7 +5,7 @@ require "../src/CadastroAluno.php";
 require "../src/redireciona.php";
 
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cadastro = new CadastroAluno($mysql);
     $cadastro->adicionar($_POST['nome'], $_POST['numero']);
 
@@ -16,12 +16,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Aluno</title>
 </head>
+
 <body>
     <div id="container">
         <h1>Adicionar Aluno</h1>
@@ -35,9 +37,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <input class="campo-form" type="text" name="numero" id="numero"></input>
             </p>
             <p>
-            <a><button>Finalizar Cadastro</button></a>
+                <a><button>Finalizar Cadastro</button></a>
             </p>
         </form>
     </div>
 </body>
+
 </html>
