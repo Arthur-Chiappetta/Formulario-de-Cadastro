@@ -32,9 +32,20 @@ if (isset($_GET['busca'])) {
     <h1>Alunos Cadastrados</h1>
   </center>
 
+  <?php
+
+  $dados = filter_input_array(INPUT_GET);
+  var_dump($dados);
+
+  ?>
+
   <form action="">
     <input name="busca" placeholder="Pesquisar" type="text">
     <button type="submit">Pesquisar</button>
+    <p>
+      <input type="checkbox" name="nome" value="nome" onchange="pesquisar()"><label>Nome</label>
+      <input type="checkbox" name="numero" value="numero"><label>Celular</label>
+    </p>
   </form>
   <br />
   <table class="table" border="1">
