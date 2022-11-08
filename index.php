@@ -7,7 +7,7 @@ require 'src/BuscaEspecifica.php';
 $cadastro = new CadastroAluno($mysql);
 $cadastros = $cadastro->exibirTodos();
 
-$tipoBusca;
+$tipoBusca = '';
 
 if (isset($_GET['nome'])) {
   $tipoBusca = 'nome';
