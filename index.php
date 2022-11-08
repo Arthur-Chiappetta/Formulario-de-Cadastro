@@ -9,18 +9,16 @@ $cadastros = $cadastro->exibirTodos();
 
 $tipoBusca = '';
 
-if (isset($_GET['nome'])) {
-  $tipoBusca = 'nome';
+if (isset($_GET['buscaEspecifica'])) {
+  $tipoBusca = $_GET['buscaEspecifica'];
 }
 
-if (isset($_GET['numero'])) {
-  $tipoBusca = 'numero';
-}
 
 $buscaEspecifica = new BuscaEspecifica($mysql);
 if (isset($_GET['busca'])) {
   $busca = $buscaEspecifica->buscaEspecifica($_GET['busca'], $tipoBusca);
 }
+
 ?>
 
 <!doctype html>
@@ -43,8 +41,18 @@ if (isset($_GET['busca'])) {
   </center>
 
   <form action="">
-    <input type="checkbox" name="nome" value="nome"><label>Nome</label>
-    <input type="checkbox" name="numero" value="numero"><label>Celular</label>
+    <!--<input type="radio" name="buscaEspecifica" value="nome"><label>Nome</label>
+    <input type="radio" name="buscaEspecifica" value="numero"><label>Celular</label>-->
+
+    <div class="col-md-2">
+      <select class="form-control" name="buscaEspecifica">
+        <option value="nome">Nome</option>
+        <option value="numero">Celular</option>
+      </select>
+    </div>
+
+    <br />
+
     <p>
       <input type="text" name="busca" placeholder="Pesquisar">
       <input type="submit" value="pesquisar">
