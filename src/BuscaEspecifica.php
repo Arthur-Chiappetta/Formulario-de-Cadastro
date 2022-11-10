@@ -13,14 +13,13 @@ class BuscaEspecifica
     function buscaEspecifica(string $pesquisa, string $tipoBusca): array
     {
 
-        $campoPesquisa = 'nome';
-
-        if ($tipoBusca == 'nome') {
-            $campoPesquisa = 'nome';
-        }
-
-        if ($tipoBusca == 'numero') {
-            $campoPesquisa = 'numero';
+        switch ($tipoBusca) {
+            case 'nome':
+                $campoPesquisa = 'nome';
+                break;
+            case 'numero':
+                $campoPesquisa = 'numero';
+                break;
         }
 
         $busca = $this->mysql->query("SELECT * FROM alunos WHERE " . $campoPesquisa . " LIKE '%$pesquisa%'");
