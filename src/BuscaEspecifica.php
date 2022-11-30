@@ -22,7 +22,7 @@ class BuscaEspecifica
                 break;
         }
 
-        $busca = $this->mysql->query("SELECT * FROM 'alunos' WHERE " . $campoPesquisa . " LIKE '%$pesquisa%'");
+        $busca = $this->mysql->query("SELECT * FROM alunos WHERE " . $campoPesquisa . " LIKE '%$pesquisa%'");
         $resultado = $busca->fetch_all(MYSQLI_ASSOC);
         return $resultado;
     }
