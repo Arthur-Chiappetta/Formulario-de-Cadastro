@@ -16,7 +16,14 @@ if (isset($_GET['buscaEspecifica'])) {
 
 $buscaEspecifica = new BuscaEspecifica($mysql);
 if (isset($_GET['busca'])) {
-  $busca = $buscaEspecifica->buscaEspecifica($_GET['busca'], $tipoBusca);
+  if ($tipoBusca == 'dupla') {
+    $buscaNome = $buscaEspecifica->buscaEspecifica($_GET['busca'], 'nome');
+    $buscaNumero = $buscaEspecifica->buscaEspecifica($_GET['busca'], 'numero');
+
+    $busca = array_merge($buscaNome, $buscaNumero);
+  } else {
+    $busca = $buscaEspecifica->buscaEspecifica($_GET['busca'], $tipoBusca);
+  }
 }
 
 ?>
@@ -48,6 +55,7 @@ if (isset($_GET['busca'])) {
       <select class="form-control" name="buscaEspecifica">
         <option value="nome">Nome</option>
         <option value="numero">Celular</option>
+        <option value="dupla">Nome e Celular</option>
       </select>
     </div>
 
