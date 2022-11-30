@@ -27,18 +27,5 @@ class BuscaEspecifica
         return $resultado;
     }
 
-    function buscaEndereco(string $pesquisa, string $tipoBusca): array
-    {
-    
-        $campoPesquisa = '';
 
-        if($tipoBusca == 'endereco'){
-            $campoPesquisa = 'rua';
-        }
-
-        $busca = $this->mysql->query("SELECT * FROM enderecos WHERE " . $campoPesquisa . "LIKE '%$pesquisa%'");
-        $resultado = $busca->fetch_all(MYSQLI_ASSOC);
-        return $resultado;
-    
-    }
 }
