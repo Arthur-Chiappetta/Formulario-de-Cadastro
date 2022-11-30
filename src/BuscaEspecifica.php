@@ -26,6 +26,4 @@ class BuscaEspecifica
         $resultado = $busca->fetch_all(MYSQLI_ASSOC);
         return $resultado;
     }
-
-
 }
