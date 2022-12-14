@@ -3,9 +3,13 @@
 include 'config.php';
 require 'src/CadastroAluno.php';
 require 'src/BuscaEspecifica.php';
+require 'src/CadastroEndereco.php';
 
 $cadastro = new CadastroAluno($mysql);
 $cadastros = $cadastro->exibirTodos();
+
+$endereco = new CadastroEndereco($mysql);
+$enderecos = $endereco->exibirTodos();
 
 $tipoBusca = '';
 
@@ -13,14 +17,16 @@ if (isset($_GET['buscaEspecifica'])) {
   $tipoBusca = $_GET['buscaEspecifica'];
 }
 
-
 $buscaEspecifica = new BuscaEspecifica($mysql);
+
 if (isset($_GET['busca'])) {
   if ($tipoBusca == 'dupla') {
     $buscaNome = $buscaEspecifica->buscaEspecifica($_GET['busca'], 'nome');
     $buscaNumero = $buscaEspecifica->buscaEspecifica($_GET['busca'], 'numero');
 
     $busca = array_merge($buscaNome, $buscaNumero);
+  } elseif ($tipoBusca == 'endereco' || $tipoBusca == 'cidade') {
+    $buscaEndereco = $buscaEspecifica->buscaEspecifica($_GET['busca'], $tipoBusca);
   } else {
     $busca = $buscaEspecifica->buscaEspecifica($_GET['busca'], $tipoBusca);
   }
@@ -56,6 +62,8 @@ if (isset($_GET['busca'])) {
         <option value="nome">Nome</option>
         <option value="numero">Celular</option>
         <option value="dupla">Nome e Celular</option>
+        <option value="endereco"> Endereço </option>
+        <option value="cidade"> Cidade </option>
       </select>
     </div>
 
@@ -77,7 +85,7 @@ if (isset($_GET['busca'])) {
       </tr>
     </thead>
     <tbody>
-      <?php if (isset($_GET['busca'])) {
+      <?php if (isset($_GET['busca']) && isset($busca)) {
         foreach ($busca as $buscaEspecifica) : ?>
           <tr>
             <td scope="row"><?php echo $buscaEspecifica['id'] ?></td>
@@ -92,6 +100,37 @@ if (isset($_GET['busca'])) {
             <td scope="row"><?php echo $cadastro['id'] ?></td>
             <td><?php echo $cadastro['nome'] ?></td>
             <td><?php echo $cadastro['numero'] ?></td>
+          </tr>
+      <?php endforeach;
+      } ?>
+    </tbody>
+  </table>
+
+  <br />
+
+  <table class="table" border="1">
+    <thead>
+      <tr>
+        <th> Id </th>
+        <th> Cidade </th>
+        <th> Rua </th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php if (isset($_GET['busca']) && ($tipoBusca == 'endereco' || $tipoBusca == 'cidade')) {
+        foreach ($buscaEndereco as $buscaEnd) : ?>
+          <tr>
+            <td scope="row"><?php echo $buscaEnd['id'] ?></td>
+            <td><?php echo $buscaEnd['cidade'] ?></td>
+            <td><?php echo $buscaEnd['rua'] ?></td>
+          </tr>
+        <?php endforeach;
+      } else { ?>
+        <?php foreach ($enderecos as $endereco) : ?>
+          <tr>
+            <td scope="row"><?php echo $endereco['id'] ?></td>
+            <td><?php echo $endereco['cidade'] ?></td>
+            <td><?php echo $endereco['rua'] ?></td>
           </tr>
       <?php endforeach;
       } ?>

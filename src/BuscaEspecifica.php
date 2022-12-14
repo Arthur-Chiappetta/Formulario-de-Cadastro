@@ -20,10 +20,21 @@ class BuscaEspecifica
             case 'numero':
                 $campoPesquisa = 'numero';
                 break;
+            case 'endereco':
+                $campoPesquisa = 'rua';
+                break;
+            case 'cidade':
+                $campoPesquisa = 'cidade';
         }
 
-        $busca = $this->mysql->query("SELECT * FROM alunos WHERE " . $campoPesquisa . " LIKE '%$pesquisa%'");
-        $resultado = $busca->fetch_all(MYSQLI_ASSOC);
-        return $resultado;
+        if ($tipoBusca == 'nome' || $tipoBusca == 'numero') {
+            $busca = $this->mysql->query("SELECT * FROM alunos WHERE " . $campoPesquisa . " LIKE '%$pesquisa%'");
+            $resultado = $busca->fetch_all(MYSQLI_ASSOC);
+            return $resultado;
+        } else if ($tipoBusca == 'endereco' || $tipoBusca == 'cidade') {
+            $busca = $this->mysql->query("SELECT * FROM enderecos WHERE " . $campoPesquisa . " LIKE '%$pesquisa%'");
+            $resultado = $busca->fetch_all(MYSQLI_ASSOC);
+            return $resultado;
+        }
     }
 }
